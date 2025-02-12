@@ -1,12 +1,17 @@
 import React from "react";
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 
-const Favorites = ({ route }) => {
-  const { favorites } = route.params;
+const Favorites = ({ route, navigation }) => {
+  const { favorites, setFavorites } = route.params;
+
+  const handleRemoveFavorite = (item) => {
+    const updatedFavorites = favorites.filter((fav) => fav._id !== item._id);
+    setFavorites(updatedFavorites);
+    Alert.alert("Removed from Favorites", `${item.street}, Blk ${item.blk_no} has been removed from your favorites.`);
+  };
 
   return (
-
     <View style={styles.container}>
       <Text style={styles.header}>Favorited Properties</Text>
       {favorites.length > 0 ? (
@@ -14,14 +19,23 @@ const Favorites = ({ route }) => {
           data={favorites}
           keyExtractor={(item) => `${item.blk_no}-${item.street}`}
           renderItem={({ item }) => (
-            <View style={styles.itemBox}>
+            <TouchableOpacity
+              style={styles.itemBox}
+              onPress={() => navigation.navigate("Details", { flatDetails: item, favorites, setFavorites })}
+            >
               <Text style={styles.itemTitle}>
                 {item.street}, Blk {item.blk_no}
               </Text>
               <Text style={styles.itemText}>Total Units: {item.total_dwelling_units}</Text>
               <Text style={styles.itemText}>Year Completed: {item.year_completed}</Text>
               <Text style={styles.itemText}>Max Floor Level: {item.max_floor_lvl}</Text>
-            </View>
+              <TouchableOpacity
+                style={styles.removeButton}
+                onPress={() => handleRemoveFavorite(item)}
+              >
+                <Text style={styles.removeButtonText}>❌ Remove from Favorites</Text>
+              </TouchableOpacity>
+            </TouchableOpacity>
           )}
         />
       ) : (

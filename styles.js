@@ -70,5 +70,17 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#000000",
   },
+  removeButton: {
+    marginTop: 10,
+    padding: 8,
+    backgroundColor: "#FF6B6B", // Light red for the remove button
+    borderRadius: 5,
+    alignItems: "center",
+  },
+  removeButtonText: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#FFFFFF", // White text for better contrast
+  },
 });
 

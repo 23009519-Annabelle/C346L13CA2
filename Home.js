@@ -47,12 +47,20 @@ const Home = ({ navigation }) => {
   const renderItem = ({ item }) => (
     <TouchableOpacity
       style={styles.itemBox}
-      onPress={() => navigation.navigate("Details", { flatDetails: item, favorites, setFavorites })}
+      onPress={() =>
+        navigation.navigate("Details", {
+          flatDetails: item,
+          favorites,
+          setFavorites,
+        })
+      }
     >
       <Text style={styles.itemTitle}>
         {item.street}, Blk {item.blk_no}
       </Text>
-      <Text style={styles.itemText}>Total Units: {item.total_dwelling_units}</Text>
+      <Text style={styles.itemText}>
+        Total Units: {item.total_dwelling_units}
+      </Text>
       <Text style={styles.itemText}>Year Completed: {item.year_completed}</Text>
       <Text style={styles.itemText}>Max Floor Level: {item.max_floor_lvl}</Text>
     </TouchableOpacity>
@@ -76,7 +84,9 @@ const Home = ({ navigation }) => {
       />
       <Button
         title="View Favorites"
-        onPress={() => navigation.navigate("Favorites", { favorites })}
+        onPress={() =>
+          navigation.navigate("Favorites", { favorites, setFavorites })
+        }
       />
     </View>
   );

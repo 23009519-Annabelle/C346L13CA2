@@ -2,7 +2,7 @@ import React from "react";
 import { Text, ScrollView, TouchableOpacity, Alert } from "react-native";
 import { styles } from "./styles";
 
-const Details = ({ route, navigation }) => {
+const Details = ({ route }) => {
   const { flatDetails, favorites, setFavorites } = route.params;
 
   const isFavorite = favorites.some((item) => item._id === flatDetails._id);
